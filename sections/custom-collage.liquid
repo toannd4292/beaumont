@@ -1,0 +1,169 @@
+<h1 class="customCollageTitle">{{ section.settings.custom_collage_title }}</h1>
+<div class="customCollage">
+  {% for blocks in section.blocks %}
+    <div class="customBlock container-custom" style="grid-area:
+      {% case forloop.index %}
+        {% when 1 %} a
+        {% when 2 %} b
+        {% when 3 %} c
+        {% when 4 %} d
+        {% when 5 %} e
+        {% when 6 %} f
+        {% when 7 %} g
+        {% when 8 %} h
+        {% when 9 %} i
+        {% when 10 %} k
+        {% when 11 %} j
+
+      {% endcase %}">
+      {%- if blocks.settings.url != blank -%}
+          <a href="{{  blocks.settings.url }}">
+      {% endif %}
+          <img class="collageImage" src="{{ blocks.settings.collage_image | img_url: 'large' }}">
+              {%- if blocks.settings.text != blank -%}
+                <h2 class="banner__heading centered">
+                <span>{{ blocks.settings.text | escape }}</span>
+                </h2>
+            {%- endif -%}
+          </a>
+      </div>
+    {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Custom Collage",
+    "settings": [
+      {
+        "type":"text",
+        "id": "custom_collage_title",
+        "label":"custom collage title"
+      }
+    ],
+    "max_blocks": 11,
+    "blocks": [
+      {
+        "name": "collage image",
+        "type": "collage_image",
+        "settings": [
+          {
+            "type":"text",
+            "id": "title",
+            "label":"collage title"
+          },
+          {
+            "type":"image_picker",
+            "id": "collage_image",
+            "label":"collage image"
+          },
+             {
+          "type": "url",
+          "id": "url",
+          "label": "Add LINK"
+        },
+ {
+          "type": "text",
+          "id": "text",
+          "label": "Add link text"
+        }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Custom Collage"
+      }
+    ]
+  }
+{% endschema %}
+
+<style>
+  .customCollage{
+    width:100%;
+    height:100%;
+    display:grid;
+    gap:15px;
+    padding:50px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 15vw);
+    grid-template-areas: 
+                          "a a b b g d"
+                          "e f b b g c"
+                          "h h i j j j"
+                          "h h k j j j" ;
+    position:relative;
+  }
+  .container-custom{
+  position: relative;
+  text-align: center;
+  color: white;
+  }
+
+ .customCollage .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+   color:white;
+}
+  .collageImage{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    border-radius:5px;
+    filter: brightness(88%);
+  }
+   .customBlock:hover .collageImage {
+/*     position:absolute;
+    width:40%;
+    height:auto;
+    inset:0;
+    margin:auto; */
+    border: 5px solid white;
+    box-shadow: 0 0 5px #8f8e8e;
+  } 
+  .customCollageTitle{
+    text-align:center;
+    margin-bottom: 0;
+    font-size: clamp(15px, 5vw, 45px);
+    
+  }
+  @media only screen and (max-width: 1525px) {
+       .customCollage .banner__heading{
+     font-size:1.2em;
+   }
+  }
+    @media only screen and (max-width: 1215px) {
+       .customCollage .banner__heading{
+     font-size:.9em;
+   }
+  }
+      @media only screen and (max-width: 1020px) {
+       .customCollage .banner__heading{
+     font-size:.7em;
+   }
+  }
+  @media only screen and (max-width: 850px) {
+    .customCollage{
+      gap:5px;
+      padding:50px;
+      grid-template-columns: none;
+      grid-template-rows: none;
+      grid-template-areas: 
+                          "a b"
+                          "c d" 
+                          "e f"
+                          "g h"
+                          "j k"
+      "i i"
+    }
+
+   .customCollage .banner__heading{
+     font-size:1.5em;
+   }
+  }
+</style>
+
+{% javascript %}
+{% endjavascript %}

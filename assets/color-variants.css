@@ -1,0 +1,125 @@
+.m_colorVariants.scrollSwatches {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: start;
+    padding-bottom: 6px;
+}
+
+.m_colorVariants {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 180px;
+    margin: 0 auto;
+    padding: 45px 0 10px 5px;
+}
+
+.colorLi {
+    width: 12px;
+    height: 12px;
+    border: 0px solid black;
+    flex-grow: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+    border: 1px solid #00000000;
+    /* border-radius: 50%; */
+}
+
+@media only screen and (max-width: 600px) {
+    .m_colorVariants {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex-wrap: wrap;
+        justify-content: start;
+        max-width: 130px;
+        margin: 0 0 5px 0;
+        padding: 0px 0 0 0;
+    }
+    .colorLi {
+        width: 10px;
+        height: 10px;
+        border: 0px solid black;
+        flex-grow: 0;
+        flex-shrink: 0;
+        cursor: pointer;
+        border: 1px solid #00000000;
+        /* border-radius: 50%; */
+    }
+}
+
+.merox_cardContent .card__information {
+    overflow: hidden;
+}
+
+.scrollSwatches::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    margin-left: 0.5rem;
+}
+
+.scrollSwatches::-webkit-scrollbar-track {
+    background: transparent;
+    border: 1px solid #dfdfdf;
+}
+
+.scrollSwatches::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10rem;
+}
+
+.scrollSwatches::-webkit-scrollbar-corner {
+    display: none;
+}
+
+.scrollSwatches::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.showOtherVariants {
+    cursor: pointer;
+    font-size: 12px;
+    padding-right: 1rem;
+}
+
+.hideVariants {
+    display: none;
+}
+
+
+/*   .merox_cardContent * {
+    text-align: left !important;
+
+  } */
+
+@media (min-width: 989px) {
+    /*    .merox_cardContent {
+      position: absolute;
+      background: #ffffff57;
+      bottom: 0;
+      height: 100px;
+      z-index: 99999;
+      display: none;
+    } */
+    .collage-layout li:hover .merox_cardContent {
+        display: block;
+    }
+    .collage-layout li:hover .meroxGrid .badge {
+        display: flex;
+    }
+    .meroxGrid .card__badge {
+        align-self: unset;
+        grid-row-start: unset;
+        justify-self: unset;
+    }
+    .meroxGrid .badge {
+        background: unset;
+        color: black;
+        border: 0;
+        padding: 0;
+        display: none;
+    }
+}

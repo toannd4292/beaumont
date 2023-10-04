@@ -1,0 +1,44 @@
+{% layout none %}
+<h1>My Wishlist</h1>
+
+<ul id="wishlist-items">
+  {% for item in customer.metafields.wishlist %}
+    <li>{{ item.title }} <a href="#" data-id="{{ item.id }}" class="remove-from-wishlist">Remove</a></li>
+  {% endfor %}
+</ul>
+
+<script>
+  var removeButtons = document.querySelectorAll('.remove-from-wishlist');
+
+  for (var i = 0; i < removeButtons.length; i++) {
+    removeButtons[i].addEventListener('click', function(e) {
+      e.preventDefault();
+
+      var id = this.dataset.id;
+      var customer = {{ customer | json }};
+      var wishlist = customer.metafields.customer.wishlist;
+
+      for (var j = 0; j < wishlist.length; j++) {
+        if (wishlist[j].id === id) {
+          wishlist.splice(j, 1);
+          break;
+        }
+      }
+
+      // Update customer metafield
+      Shopify.put('/admin/customers/' + customer.id + '.json', {
+        "customer": {
+          "metafields": [
+            {
+              "key": "wishlist",
+              "value": JSON.stringify(wishlist),
+              "value_type": "json_string"
+            }
+          ]
+        }
+      });
+
+      this.parentNode.remove();
+    });
+  }
+</script>

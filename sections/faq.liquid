@@ -1,0 +1,443 @@
+<style>
+  .m_text_medium {
+    font-size: 18px;
+    margin:4px 0px;
+  }
+  .m_warranty_section {
+    margin-top: 60px;
+  }
+  .m_page_main {
+    margin-top: 60px;
+  }
+  .m_sidebar ul {
+    list-style: none;
+  }
+  .product-warranty-outer {
+    position: relative;
+    height: 100%;
+  }
+  .m_sidebar ul li {
+    padding: 10px;
+  }
+  .m_page-header .Heading {
+    color: {{ section.settings.heading_color }};
+    text-transform: uppercase;
+    letter-spacing: .125em;
+    text-align: center;
+    font-weight: bold;
+  }
+  .product-warranty-outer {
+    margin-bottom: 40px;
+  }
+  .u-h1{
+    font-weight: bold;
+    font-size: 22px;
+  }
+ .m_contect_Furniture {
+    display: none;
+  }
+  .m_contect_Furniture.v_active {
+    display: block;
+  }
+  .meroxWhiteBackground {
+    background: white !important;
+  }
+  .m_accordion {
+    background-color: white;
+    cursor: pointer;
+    padding: 10px 0;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    position: relative;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 1.5rem);
+  }
+  .m_accordion.active:after {
+    transform: translateY(35%) rotate(-225deg);
+  }
+  .m_accordion:after {
+    position: absolute;
+    right: 0.71428571rem;
+    height: 0.71428571rem;
+    width: 0.71428571rem;
+    content: "";
+    display: block;
+    border-left: 0.14285714rem solid {{ section.settings.faq_icon_color }};
+    border-bottom: 0.14285714rem solid {{ section.settings.faq_icon_color }};
+    top: 50%;
+    margin-top: -1rem;
+    transform: translateY(35%) rotate(-45deg);
+    transition: transform .05s linear;
+  }
+  .m_panel {
+    background-color: white;
+    display: none;
+    font-size: 14px;
+  }
+  .sub_heading_rp p { 
+    text-align:center;
+    margin: 0 auto 30px;
+    max-width: 650px;
+  }
+  h3.careTitle {
+    font-size: 20px;
+    margin: 15px 0;
+    text-transform: uppercase;
+  }
+  span.greenBorder {
+    position: absolute;
+    border-bottom: 4px solid black;
+    width: 40px;
+  }
+  .careDescription {
+    margin: 40px 0;
+    font-size: 15px;
+  }
+  .m_sidebar {
+    cursor: pointer;
+    padding: 10px 20px;
+    color: {{ section.settings.tab_color }};
+    font-weight: 600;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 1.5rem);
+    text-transform: uppercase;
+    text-decoration: none;
+
+  }
+  .m_sidebar.m_active {
+    color: #1a1a1a;
+    font-weight: 600;
+       font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 1.5rem);
+    text-transform: uppercase;
+    text-decoration: none;
+
+  }
+  .m_sidebar:hover {
+    background-color: {{ section.settings.tab_hover }};
+}
+  .product-warranty-outer {
+    margin-bottom: 40px;
+    display: flex;
+    gap: 50px;
+  }
+  .m_accordions {
+    flex: 1;
+    padding: 10px 0;
+  }
+  .product-warranty-sidebar::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    margin-left: 0.5rem;
+  }
+  .product-warranty-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+    border:1px solid #dfdfdf;
+  }
+  .product-warranty-sidebar::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10rem;
+  }
+  .product-warranty-sidebar::-webkit-scrollbar-corner {
+    display: none;
+  }
+  .product-warranty-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  .m_page-header {
+    background: {{ section.settings.heading_background }};
+    width: 100%;
+    padding: 3em 20px 2em;
+  }
+  .m_accordion {
+    color: {{ section.settings.question_color }};
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 1.5rem); 
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .m_panel * {
+    color: {{ section.settings.answer_color }};
+    letter-spacing: .02em;
+  }
+  .faqHeading {
+    color: {{ section.settings.faq_heading_color }} ;
+    font-weight: 600;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 1.5rem);
+    text-transform: uppercase;
+    text-decoration: none;
+
+  }
+  .m_accordion span {
+    padding-right: 16px;
+  }
+ @media only screen and (max-width: 799px) {
+   .content_head_h {
+     font-size: 20px !important;
+   }
+   .m_page-header p {
+     text-align: justify;
+   }
+   .product-warranty-outer {
+     flex-direction: column;
+   }
+   .m_sidebar {
+     padding: 0 5px 10px;
+     flex-shrink: 0;
+   }
+   .product-warranty-sidebar {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+  }
+ }
+</style>
+<!-- <div class="m_page-header">
+  {% if section.settings.heading != blank %}
+  <h1 class="Heading">{{ section.settings.heading }}</h1>
+  {% endif %}
+</div> -->
+<section data-section-type="faq" data-section-id="{{ section.id }}" class="page-width m_warranty_section">
+  <div class="Container for_desktop">
+
+    
+    <div class="m_page_main">
+      <!--    side menu nav code start    -->
+      <div class="product-warranty-outer">
+       <div class="product-warranty-sidebar">        
+        {% for block in section.blocks  %}
+        <div class="m_sidebar {% if forloop.first %} m_active {% endif %}" data-index="{{ forloop.index }}">
+          {% if block.settings.title != blank %}
+            <div class="Heading-merox">{{ block.settings.title }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+       </div>
+       <div class="m_accordions">
+        {% for block in section.blocks %}
+          <div class="m_contect_Furniture {% if forloop.first == true %} v_active {% endif %}" id="content_show{{ forloop.index }}">          
+             <div class="careFAQ">
+              <p class="faqHeading" style="margin-bottom: 10px;">{{ block.settings.title }}</p>
+               {% for i in (1..10) %}
+                {% capture question %}question{{ i }}{% endcapture %}
+                {% capture answer %}answer{{ i }}{% endcapture %}
+               {% if block.settings[question] != blank %}
+                <div class="cstmAccordian">
+                  <button class="m_accordion">
+                   <span>{{ block.settings[question] }}</span>
+                  </button>
+                  <div class="m_panel">
+                    <div style="margin: 10px 0;">{{ block.settings[answer] }}</div>
+                  </div>
+                </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      </div>
+      <!--    side menu nav code end    -->
+    </div>
+  </div>
+</section>
+
+
+<script>
+  $(document).ready(function(){
+      $('.m_sidebar').click(function(){
+        var index = $(this).attr('data-index');
+        $(this).addClass('m_active');
+        $('.m_sidebar').not(this).removeClass('m_active');
+        $('.m_contect_Furniture').removeClass('v_active');
+        $('#content_show'+index).addClass('v_active');
+      });
+
+      $('.m_accordion').click(function(){
+        $(this).parent().find('.m_panel').slideToggle();
+        $(this).toggleClass('active');
+        $('.m_accordion').not(this).parent().find('.m_panel').slideUp();
+        $('.m_accordion').not(this).removeClass('active');
+      });
+
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Tabbed Section",
+  "class": "meroxWhiteBackground",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading"
+    },
+    {
+      "type": "color",
+      "id": "heading_background",
+      "label": "Heading Background"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Font Color"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover",
+      "label": "Tab Background Color(on Hover)"
+    },
+    {
+      "type": "color",
+      "id": "tab_color",
+      "label":"Tab Font Color"
+    },
+    {
+      "type": "color",
+      "id": "faq_icon_color",
+      "label":"FAQ Icon Color"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question Font Color"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Answer Font Color"
+    },
+    {
+      "type": "color",
+      "id": "faq_heading_color",
+      "label": "FAQ Heading Color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Menu Title"
+        },
+        {
+          "id" : "question1",
+          "type" : "text",
+          "label" : "Question 1"
+        },
+        {
+          "id" : "answer1",
+          "type" : "richtext",
+          "label" : "Answer 1"
+        },
+        {
+          "id" : "question2",
+          "type" : "text",
+          "label" : "Question 2"
+        },
+        {
+          "id" : "answer2",
+          "type" : "richtext",
+          "label" : "Answer 2"
+        },
+        {
+          "id" : "question3",
+          "type" : "text",
+          "label" : "Question 3"
+        },
+        {
+          "id" : "answer3",
+          "type" : "richtext",
+          "label" : "Answer 3"
+        },
+        {
+          "id" : "question4",
+          "type" : "text",
+          "label" : "Question 4"
+        },
+        {
+          "id" : "answer4",
+          "type" : "richtext",
+          "label" : "Answer 4"
+        },
+        {
+          "id" : "question5",
+          "type" : "text",
+          "label" : "Question 5"
+        },
+        {
+          "id" : "answer5",
+          "type" : "richtext",
+          "label" : "Answer 5"
+        },
+        {
+          "id" : "question6",
+          "type" : "text",
+          "label" : "Question 6"
+        },
+        {
+          "id" : "answer6",
+          "type" : "richtext",
+          "label" : "Answer 6"
+        },
+        {
+          "id" : "question7",
+          "type" : "text",
+          "label" : "Question 7"
+        },
+        {
+          "id" : "answer7",
+          "type" : "richtext",
+          "label" : "Answer 7"
+        },
+        {
+          "id" : "question8",
+          "type" : "text",
+          "label" : "Question 8"
+        },
+        {
+          "id" : "answer8",
+          "type" : "richtext",
+          "label" : "Answer 8"
+        },
+        {
+          "id" : "question9",
+          "type" : "text",
+          "label" : "Question 9"
+        },
+        {
+          "id" : "answer9",
+          "type" : "richtext",
+          "label" : "Answer 9"
+        },
+        {
+          "id" : "question10",
+          "type" : "text",
+          "label" : "Question 10"
+        },
+        {
+          "id" : "answer10",
+          "type" : "richtext",
+          "label" : "Answer 10"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "FAQ Tabbed Section"
+  }]
+}
+{% endschema %}

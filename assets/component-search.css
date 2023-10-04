@@ -1,0 +1,76 @@
+.search__input.field__input {
+  padding-right: 5rem;
+  border:0;
+  box-shadow: none;
+  border-bottom: 1px solid;
+}
+.search__input.field__input:focus {
+  padding-right: 5rem;
+  border:0;
+    border-bottom: 1px solid;
+}
+
+.search__button {
+  right: var(--inputs-border-width);
+  top: var(--inputs-border-width);
+}
+
+.search__button:focus-visible {
+  background-color: rgb(var(--color-background));
+  z-index: 2;
+}
+
+.search__button:focus {
+  background-color: rgb(var(--color-background));
+  z-index: 2;
+}
+
+.search__button:not(:focus-visible):not(.focused){
+/*   box-shadow: inherit; */
+  background-color: inherit;
+  border:0;
+}
+
+.search__button .icon {
+  height: 1.8rem;
+  width: 1.8rem;
+}
+
+/* Remove extra spacing for search inputs in Safari */
+input::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.quick-links{
+  display:flex;
+  flex-direction:row;
+  align-items: baseline;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.inline-search{
+      display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  list-style-type:none;
+}
+
+.inline-search li{
+  padding: 0 1rem;
+  width: max-content;
+}
+
+@media only screen and (max-width: 750px) {
+ .inline-search li{
+  padding: 1.5rem 1rem;
+  width: max-content;
+}
+  .inline-search{
+      display: flex;
+    flex-wrap:wrap;
+    flex-direction: row;
+    align-items: baseline;
+  list-style-type:none;
+}
+}

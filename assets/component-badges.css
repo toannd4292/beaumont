@@ -1,0 +1,223 @@
+.product-badges {
+    bottom: unset;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    justify-content: center;
+    left: 90%;
+    top:1%;
+    min-width: 150px;
+    text-align: center;
+    -ms-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 100%;
+    position: absolute;
+/*     top: 30px; */
+    z-index: 2;
+    gap: 5px;
+}
+
+ .product-badges .badge {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: none;
+   height: 63px;
+   width: 63px;
+   background-color: #bbb;
+   border-radius: 50%;
+   padding: 10px;
+}
+.product-badges .badge.badge-primary {
+    background-color: #c1ab62;
+    color: #000;
+}
+
+.product-badges .badge.badge-secundary {
+    background-color: #000;
+    color: #c1ab62;
+}
+
+.product-badges .badge.badge-tertiary{
+        background-color: #f3f0ea;
+    color: #000;
+}
+
+.product-badges .badge span {
+    margin: 0;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    overflow: hidden;
+    text-align: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    white-space: normal;
+    -ms-word-break: break-word;
+    word-break: break-word;
+    line-height: 1;
+    letter-spacing: .66px;
+    font-size: 9px;
+/*     font-weight: 600; */
+}
+
+.card__content .product-badges {
+    left: 50%;
+    bottom: 0 !important;
+    top: auto;
+    z-index: 2;
+}
+
+
+.product-detail {
+  left: 50% !important;
+  justify-content: start;
+}
+
+@media only screen and (max-width: 1250px) {
+  .product-badges {
+    left: 85%;
+  }
+    .card__content .product-badges .badge span,
+    .product-detail .badge span{
+        font-size: 9px;
+  
+    }
+  .card__content .product-badges .badge,
+  .product-detail .badge{
+      width: 55px;
+      height: 55px;
+  
+    }
+}
+@media only screen and (max-width: 1840px) {
+  .product-badges {
+    left:88%;
+  }
+}
+@media only screen and (max-width: 1550px) {
+  .product-badges {
+    left:86%;
+  }
+}
+@media only screen and (max-width: 1550px) {
+  .product-badges {
+    left:84%;
+  }
+}
+@media only screen and (max-width: 1040px) {
+    .card__content .product-badges .badge span,
+    .product-detail .badge span{
+        font-size: 8px;
+  
+    }
+  .card__content .product-badges .badge,
+  .product-detail .badge{
+      width: 45px;
+      height: 45px;
+  
+    }
+    .product-badges {
+    left:82%;
+  }
+}
+@media only screen and (max-width: 990px) {
+  .product-badges {
+    bottom: unset;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    justify-content: end;
+    left: -70%;
+    min-width: 150px;
+    text-align: center;
+    -ms-transform: unset;
+    -webkit-transform: unset;
+    transform: unset;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    gap: 5px;
+}
+    .product-detail  {
+    justify-content: left;
+    top: 0px;
+    }
+
+   .product-badges .badge {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: none;
+   height: 48px;
+   width: 48px;
+   background-color: #bbb;
+   border-radius: 50%;
+   padding: 10px;
+}
+
+  .product-badges .badge span {
+    margin: 0;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    overflow: hidden;
+    text-align: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    white-space: normal;
+    -ms-word-break: break-word;
+    word-break: break-word;
+    line-height: 1;
+    letter-spacing: .66px;
+    font-size: 5px;
+    font-weight: 600;
+}
+}
+
+
+@media only screen and (max-width: 920px) {
+    .card__content .product-badges .badge span 
+  {
+        font-size: 7px;
+        margin: -10px;
+    }
+
+  .product-detail .badge span {
+
+    margin: -10px;
+    font-size: 11px;
+  }
+
+  
+  .card__content .product-badges .badge
+  {
+    width: 40px;
+    height: 40px;
+  
+    }
+}
+.product-badges-inner {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+}
+.product-detail-badge {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+
+

@@ -1,0 +1,93 @@
+.accordion summary {
+  display: flex;
+  position: relative;
+  line-height: 1;
+  padding: 1.5rem 0;
+}
+
+.accordion .summary__title {
+  display: flex;
+  flex: 1;
+}
+
+.accordion .summary__title + .icon-caret {
+  height: calc(var(--font-heading-scale) * 0.6rem);
+}
+.accordion .icon-plus {
+  height: calc(var(--font-heading-scale) * 0.9rem);
+  margin:5px;
+}
+.product__accordion .icon-minus {
+  display:none;
+  height: calc(var(--font-heading-scale) * 0.2rem);
+}
+
+.accordion + .accordion {
+  margin-top: 0;
+  border-top: none;
+}
+
+.accordion {
+  margin-top: 2.5rem;
+  margin-bottom: 0;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+}
+
+.accordion__title {
+  display: inline-block;
+  max-width:100%;
+/*   max-width: calc(100% - 3rem); */
+  min-height: 1.6rem;
+  margin: 0;
+  word-break: break-word;
+  text-transform: uppercase;
+}
+
+.accordion .icon-accordion {
+  align-self: center;
+  fill: rgb(var(--color-foreground));
+  height: calc(var(--font-heading-scale) * 2rem);
+  margin-right: calc(var(--font-heading-scale) * 1rem);
+  width: calc(var(--font-heading-scale) * 2rem);
+}
+
+.accordion details[open] > summary .icon-caret {
+  transform: rotate(180deg);
+}
+.accordion details[open] > summary .icon-plus {
+  display:none;
+}
+.accordion details[open] > summary .icon-minus {
+  display:block;
+  width: calc(var(--font-heading-scale) * 0.9rem);
+  margin:8px;
+}
+
+.accordion__content {
+  margin-bottom: 1.5rem;
+  word-break: break-word;
+  overflow-x: auto;
+  padding: 0 0.6rem;
+}
+
+.accordion__content img {
+  max-width: 100%;
+}
+
+
+.product__accordion details
+{
+    transition: height 1s ease;
+    overflow: hidden;
+}
+
+.product__accordion details:not([open])
+{
+    height: 2.5em;
+}
+
+.product__accordion details[open]
+{
+    height: 15em;
+}

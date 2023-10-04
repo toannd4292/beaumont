@@ -1,0 +1,76 @@
+{% assign totalCount = 0 %}
+{% assign products = product.metafields.custom.color_swatches.value %}
+{%- assign color_swatch_config = settings.color_swatch_config | newline_to_br | split: '<br />' -%}
+
+<div class="m_colorVariants">
+  {% if products != blank %}
+    {% assign color = '' %}
+    {% for color_option in product.options_by_name.color.values %}
+      {% assign color = color_option %}
+    {% endfor %}
+    <div
+      class="colorLi"
+      style="
+        {% if product.metafields.custom.color_swatch_image != blank %}
+        background-image: url({{ product.metafields.custom.color_swatch_image | img_url:'100x' }}); background-position: center;
+        {% else %}
+        {% if color contains 'white' or color contains 'White' or product.title contains 'cream' or product.title contains 'Cream' or product.title contains 'white' or product.title contains 'White' %}border: 1px solid #00000030; padding: 5.5px;{% endif %}
+        {% render 'color-swatch-style', color_swatch_config: color_swatch_config, value: color %}{% endif %}
+      "
+      data-title="{{ product.title }}"
+      {% comment %} data-price="{{ product.selected_or_first_available_variant.price | money_with_currency }}" {% endcomment %}
+      data-href="{{ product.url }}"
+      data-name="{{ product.title }}"
+      data-image="{{ product.featured_image | img_url : '600x' }}"
+      data-secondary-image="{% if product.images[1] != blank %}{{ product.images[1] | img_url : '600x' }}{% else %} {{ product.images[0] | img_url : '600x' }} {% endif %}"
+    ></div>
+  {% endif %}
+  {% for product in products limit: 3 %}
+    {% assign color1 = '' %}
+    {% for color_option in product.options_by_name.color.values %}
+      {% assign color1 = color_option %}
+    {% endfor %}
+    <div
+      class="colorLi"
+      style="
+        {% if product.metafields.custom.color_swatch_image != blank %}
+        background-image: url({{ product.metafields.custom.color_swatch_image | img_url:'100x' }}); background-position: center;
+        {% else %}
+        {% if color contains 'white' or color contains 'White' or product.title contains 'Ivory' or product.title contains 'cream' or product.title contains 'Cream' or product.title contains 'white' or product.title contains 'White' %}border: 1px solid #00000030; padding: 5.5px;{% endif %}
+        {% render 'color-swatch-style', color_swatch_config: color_swatch_config, value: color1 %}{% endif %}
+      "
+      data-title="{{ product.title }}"
+      {% comment %} data-price="{{ product.selected_or_first_available_variant.price | money_with_currency }}" {% endcomment %}
+      data-href="{{ product.url }}"
+      data-name="{{ product.title }}"
+      data-image="{{ product.featured_image | img_url : '600x' }}"
+      data-secondary-image="{% if product.images[1] != blank %}{{ product.images[1] | img_url : '600x' }}{% else %} {{ product.images[0] | img_url : '600x' }} {% endif %}"
+    ></div>
+  {% endfor %}
+
+  {% for product in products offset: continue %}
+    {% assign totalCount = forloop.length %}
+    {% assign color2 = '' %}
+    {% for color_option in product.options_by_name.color.values %}
+      {% assign color2 = color_option %}
+    {% endfor %}
+    <div
+      class="colorLi hideVariants"
+      style="
+        {% if product.metafields.custom.color_swatch_image != blank %}
+             background-image: url({{ product.metafields.custom.color_swatch_image | img_url:'100x' }}); background-position: center;
+             {% else %}{% if color contains 'white' or product.title contains 'Ivory' or product.title contains 'cream' or product.title contains 'Cream' or color contains 'White' or product.title contains 'white' or product.title contains 'White' %}border: 1px solid #00000030; padding: 5.5px;{% endif %}
+        {% render 'color-swatch-style', color_swatch_config: color_swatch_config, value: color2 %}{% endif %}
+      "
+      data-title="{{ product.title }}"
+      {% comment %} data-price="{{ product.selected_or_first_available_variant.price | money_with_currency }}" {% endcomment %}
+      data-href="{{ product.url }}"
+      data-name="{{ product.title }}"
+      data-image="{{ product.featured_image | img_url : '600x' }}"
+      data-secondary-image="{% if product.images[1] != blank %}{{ product.images[1] | img_url : '600x' }}{% else %} {{ product.images[0] | img_url : '600x' }} {% endif %}"
+    ></div>
+  {% endfor %}
+  {% if totalCount > 0 %}
+    <span class="showOtherVariants">+{{ totalCount }}</span>
+  {% endif %}
+</div>

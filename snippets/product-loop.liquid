@@ -1,0 +1,51 @@
+
+{% capture collection_handle %}{{ product-loop | handleize }}{% endcapture %}
+{% capture url %}{% if collection_handle != "" %}/collections/{{ product-loop }}{{ product.url }}{% else %}{{ product.url }}{% endif %}{% endcapture %}
+
+<div class="product mobile-hide {% if template == 'collection' %}{% cycle 'grid__item_3 ', 'grid__item_3', 'grid__item_3', 'grid__item_4', 'grid__item_4', 'grid__item_4', 'grid__item_4' %} {% else %} span3{% endif %} ">
+     {% render 'card-product',
+                    card_product: product,
+                    media_aspect_ratio: section.settings.image_ratio,
+                    show_secondary_image: section.settings.show_secondary_image,
+                    show_vendor: section.settings.show_vendor,
+                    show_rating: section.settings.show_rating,
+                    lazy_load: lazy_load,
+                    show_quick_add: section.settings.enable_quick_add,
+                    section_id: section.id
+                %}
+</div>
+
+    <div class="product mobile-show {% if template == 'collection' %}{% cycle 'remove-mob grid__item_2', 'remove-mob grid__item_2'  %} {% else %} span3{% endif %} ">
+                      {% render 'card-product-mobile',
+                    card_product: product,
+                    media_aspect_ratio: section.settings.image_ratio,
+                    show_secondary_image: section.settings.show_secondary_image,
+                    show_vendor: section.settings.show_vendor,
+                    show_rating: section.settings.show_rating,
+                    lazy_load: lazy_load,
+                    show_quick_add: section.settings.enable_quick_add,
+                    section_id: section.id
+                      %}
+
+</div>
+
+{% if template contains 'collection' %}
+    {% cycle '','', '<div class="remove-mob" "></div>', '','','','<div class="remove-mob""></div>' %}
+{% endif %}
+
+
+{% unless template contains 'collection' %}
+{% cycle 'clear-product-loop': '', '', '', '<div class="remove-mob" "></div>' %}
+{% endunless %}
+
+
+<style>
+  .remove-mob{
+    clear:both;
+  }
+  @media only screen and (max-width: 600px) {
+  .remove-mob {
+   clear:none;
+  }
+}
+</style>

@@ -1,0 +1,87 @@
+<div class="page-location">
+           <noscript>
+            {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
+              <h2 class="caption-large text-body" id="FooterCountryLabel">SHOP TO:</h2>
+              <div class="localization-form__select">           
+                <select class="localization-selector link" name="country_code" aria-labelledby="FooterCountryLabelNoScript">
+                  {%- for country in localization.available_countries -%}
+                    <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                      {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                    </option>
+                  {%- endfor -%}
+                </select>
+                {% render 'icon-caret' %}
+              </div>
+              <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
+            {%- endform -%}
+          </noscript>
+          <localization-form >
+               <h2 class="caption-large text-body" id="FooterCountryLabel">CURRENT COUNTRY: </h2>
+            {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%} 
+                     <input type="hidden" name="return_to" value="/">
+              <div class="no-js-hidden">
+                <div class="disclosure">
+                  <button id="redirectbtn"  type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="true" aria-controls="FooterCountryList" aria-describedby="FooterCountryLabel">
+                    {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+                  </button>
+                     <h2 class="caption-large text-body" id="FooterCountryLabel" style="padding:2rem 0;">OR SELECT YOUR COUNRTY: </h2>
+                  <div class=""  style="bottom: auto;">
+                    <ul id="FooterCountryList" role="list" class=" list-unstyled">
+                      {%- for country in localization.available_countries -%}
+                        <li class="disclosure__item" tabindex="-1">
+                          <a class="page-location link link--text disclosure__link caption-large{% if country.iso_code == localization.country.iso_code %} disclosure__link--active{% endif %} focus-inset" href="{{ shop.url }}"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
+                            {{ country.name }} <span class="localization-form__currency">({{ country.currency.iso_code }} {{ country.currency.symbol }})</span>
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                </div>
+                <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+              </div>
+            {%- endform -%}
+          </localization-form>
+</div>
+
+<!-- <script>
+$('.page-location').click(function()
+{
+var test = window.location.href.replace('pages/listing-countries', "")
+    setTimeout(function(){ window.location.href=test; }, 500);       
+});
+</script> -->
+
+<style>
+/* .page-location  ul li{
+  width: 33%;
+  float: left;
+} */
+  
+.page-location  ul {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  padding-left:0!important;
+}
+  
+
+.page-location .localization-form__select {
+  padding:0;
+}
+  .page-location a{
+    padding-left:0;
+  }
+  
+    @media screen and (max-width: 760px) {
+/*    .page-location  ul li{
+      width: 100%;
+    float: inherit;
+    text-align: center;
+} */
+      .page-location  ul {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+}
+  }
+</style>

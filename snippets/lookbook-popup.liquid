@@ -1,0 +1,223 @@
+<style>
+  .modal2 {
+    position: fixed;
+    display: none;
+    z-index: 9999;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .modalframe {
+    background-color: #f2efe7;
+    margin: auto;
+    width: 90%;
+    height: 550px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #modalchart .close {
+    position: absolute;
+    background-color: white;
+    border: none;
+    top: 0px;
+    right: 0px;
+    margin: 10px;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    border-radius: 50%;
+    z-index: 10;
+  }
+  .modal_content {
+    display: none;
+  }
+  .mainProductInfo {
+    display: flex;
+    height: 550px;
+  }
+  .main_product, .mainProductList {
+    width: 50%;
+  }
+  .main_product {
+    position: relative;
+    margin: 3em;
+  }
+  .main_prodImage, .productList img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .mainProductList {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 3em;
+  }
+  .productList * {
+    color: black;
+    text-decoration: unset;
+  }
+  .productList {
+    margin-bottom: 10px;
+  }
+  .mainProductList::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    margin-left: 0.5rem;
+  }
+  .mainProductList::-webkit-scrollbar-track {
+    background: #484848;
+    border:1px solid #484848;
+  }
+  .mainProductList::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 10rem;
+  }
+  .mainProductList::-webkit-scrollbar-corner {
+    display: none;
+  }
+  .lookbookHotspot {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+   .lookbookHotspot.showOnMobile {
+    display: block;
+  }
+    .modalframe {
+      width: 100%;
+      height: 100%;
+    }
+    .modalContent {
+      padding-top: unset;
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+      padding-bottom: 10px;
+    }
+    #modalchart .close {
+      margin: 10px;
+    }
+    .mainProductInfo {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .main_product, .mainProductList {
+      width: 100%;
+    }
+    .main_product {
+      margin: 0;
+    }
+    .modalframe {
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 2em;
+    }
+    .mainProductList {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
+      padding: 0;
+      overflow-y: unset;
+      overflow-x: unset;
+    }
+  }
+  @media (min-width: 769px) {
+    .modalframe {
+      width: auto;
+    }
+    .lookbookHotspot.showOnDesktop {
+      display: block;
+    }
+  }
+</style>
+
+
+<div id="modalchart" class="modal2 modalchart-{{ section.id }}">
+  <div class="modalframe">     
+    <span class="close">
+      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" color="#000000" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: black;"><path fill="none" d="M0 0h24v24H0z"></path><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+    </span>       
+   {% for block in section.blocks %}
+    <div class="modal_content" data-content="lookbook-{{ section.id }}-{{ forloop.index }}">
+     <div class="mainProductInfo">
+     <div class="main_product">
+      <img class="main_prodImage" src="{{ block.settings.image | img_url : '600x'}}">
+      {% for i in (1..5) %}
+         {% capture product %}product{{ i }}{% endcapture %}
+         {% capture x_axis_id %}x_axis{{ i }}{% endcapture %}
+         {% capture y_axis_id %}y_axis{{ i }}{% endcapture %}
+         {% if block.settings[product] != blank %}
+         {% assign product = block.settings[product] %}
+         <a href="{{ product.url }}" class="lookbookHotspot {% if block.settings.show_hotspot == true %}showOnDesktop{% endif %} {% if block.settings.show_hotspot_mobile == true %}showOnMobile{% endif %}">
+           <div class="shoppable-image__hotspot {% if block.settings[x_axis_id] < 30 %} tooltip--overflow-left {% endif %} {% if block.settings[x_axis_id] > 70 %} tooltip--overflow-right {% endif %}" 
+              style="left:{{ block.settings[x_axis_id] }}%; bottom:{{ block.settings[y_axis_id] }}%;">
+              <div class="shoppable-image__hotspot-inner"></div>
+            </div>
+         </a>
+        {% endif %}
+       {% endfor %}
+    </div>
+    <div class="mainProductList">
+      {% for i in (1..5) %}
+         {% capture product %}product{{ i }}{% endcapture %}
+         {% if block.settings[product] != blank %}
+         {% assign product = block.settings[product] %}
+          <div class="productList">
+               <a href="{{ product.url }}">
+                  <div>
+                    <img src="{{ product.featured_image | img_url: '300x' }}">    
+                   </div>
+                  <div>
+                    <div>{{ product.title }}</div>
+                    <div>{{ product.price  | money }}</div>
+                  </div>
+                </a>
+            </div>
+            
+        {% endif %}
+       {% endfor %}
+      </div>
+     </div>
+    </div>
+  {% endfor %}
+  </div>       
+</div>
+
+
+
+<script>
+  $(document).ready(function() {
+    $('.shopTheLook').click(function(){
+      var index = $(this).parent().attr('data-index');
+      $('.modal_content[data-content="'+index+'"]').show();
+      $(this).parents('.shopify-section').find('.modalchart-{{ section.id }}').show(300);
+    });
+
+    if($(window).width() <= 768) {
+      $('.m_lookbookProduct').click(function(){
+         var index = $(this).attr('data-index');
+         $('.modal_content[data-content="'+index+'"]').show();
+         $(this).parents('.shopify-section').find('.modalchart-{{ section.id }}').show(300);
+      });
+    }
+    
+    $('.modalchart-{{ section.id }} .close').click(function() {
+      $('.modalchart-{{ section.id }}').hide(300);
+      $('.modal_content').hide();
+    });
+    
+  });
+                             
+</script>
