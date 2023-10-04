@@ -841,7 +841,7 @@
                                   {% if block.settings.mega_url != blank %}
                                   <a class="mega-image-text" href="{{block.settings.mega_url}}">
                                   {% endif %}
-                               <img src="{{block.settings.mega_image | img_url: 'master'}}" alt="{{block.settings.mega_image.alt | escape }}" loading="lazy" style="max-width: {{block.settings.mega_image_size}}rem; width:100%;  display: block; float:right; margin-right:14rem;"> 
+                               <img class=" lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{block.settings.mega_image | img_url: 'master'}}" alt="{{block.settings.mega_image.alt | escape }}" loading="lazy" style="max-width: {{block.settings.mega_image_size}}rem; width:100%;  display: block; float:right; margin-right:14rem;"> 
                                 <p>{{block.settings.header_title}}</p>  
                                 {% if block.settings.mega_url != blank %}</a>{% endif %}
                               {% endif %}
@@ -1174,7 +1174,8 @@ $('.redirect-loc').click(function()
 {
     setTimeout(function(){ window.location.href='https://beaumont.eu/pages/listing-countries'; }, 100);       
 });
-</script>
+</script><script>document.addEventListener("startasyncloading",function(){document.querySelectorAll("script[data-src]").forEach(a=>{datasrc=a.dataset.src,null!=datasrc&&(a.src=datasrc), delete a.dataset.src})});</script>
+ 
         
 <!--           <script>
 function openMobileMenu() {
