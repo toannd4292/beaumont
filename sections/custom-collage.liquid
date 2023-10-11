@@ -19,7 +19,7 @@
       {%- if blocks.settings.url != blank -%}
           <a href="{{  blocks.settings.url }}">
       {% endif %}
-          <img class="collageImage" src="{{ blocks.settings.collage_image | img_url: 'large' }}">
+          <img class="collageImage lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ blocks.settings.collage_image | img_url: 'large' }}">
               {%- if blocks.settings.text != blank -%}
                 <h2 class="banner__heading centered">
                 <span>{{ blocks.settings.text | escape }}</span>
